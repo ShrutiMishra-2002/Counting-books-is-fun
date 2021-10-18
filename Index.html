@@ -5,7 +5,7 @@ CREATE TABLE author
     ->     PRIMARY KEY (a_id),
     ->     UNIQUE (name)
     -> );
-Query OK, 0 rows affected (0.01 sec)
+
 
 mysql> CREATE TABLE book
     -> (
@@ -17,7 +17,7 @@ mysql> CREATE TABLE book
     ->     INDEX (a_id),
     ->     PRIMARY KEY (p_id)
     -> );
-Query OK, 0 rows affected (0.01 sec)
+
 
 mysql>
 mysql> INSERT INTO author (name) VALUES
@@ -27,44 +27,31 @@ mysql> INSERT INTO author (name) VALUES
     ->  ('Picasso'),
     ->  ('Mary')
     -> ;
-Query OK, 5 rows affected (0.00 sec)
-Records: 5  Duplicates: 0  Warnings: 0
 
 mysql>
 mysql>
 mysql>
 mysql> INSERT INTO book (a_id,title,state,price)
     ->  SELECT a_id, 'Database', 'IN', 34 FROM author WHERE name = 'Tom';
-Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
 
 mysql>
 mysql> INSERT INTO book (a_id,title,state,price)
     ->  SELECT a_id, 'SQL', 'MI', 87 FROM author WHERE name = 'Tom';
-Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
 
 mysql>
 mysql> INSERT INTO book (a_id,title,state,price)
     ->  SELECT a_id, 'MySQL', 'KY', 48 FROM author WHERE name = 'Jack';
-Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
 
 mysql> INSERT INTO book (a_id,title,state,price)
     ->  SELECT a_id, 'XML', 'KY', 67    FROM author WHERE name = 'Jack';
-Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
 
 mysql> INSERT INTO book (a_id,title,state,price)
     ->  SELECT a_id, 'Java', 'IA', 33   FROM author WHERE name = 'Jack';
-Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
 
 mysql>
 mysql> INSERT INTO book (a_id,title,state,price)
     ->  SELECT a_id, 'HTML', 'NE', 64   FROM author WHERE name = 'Mary';
-Query OK, 1 row affected (0.00 sec)
-Records: 1  Duplicates: 0  Warnings: 0
+
 
 mysql>
 mysql>
@@ -73,21 +60,13 @@ mysql> SELECT author.name, COUNT(*) AS 'number of books'
     -> FROM author, book
     -> WHERE author.a_id = book.a_id
     -> GROUP BY author.name;
-+------+-----------------+
-| name | number of books |
-+------+-----------------+
-| Jack |               3 |
-| Mary |               1 |
-| Tom  |               2 |
-+------+-----------------+
-3 rows in set (0.00 sec)
+
 
 mysql>
 mysql> drop table book;
-Query OK, 0 rows affected (0.00 sec)
 
 mysql> drop table author;
-Query OK, 0 rows affected (0.00 sec)
+
 
 mysql>
 
