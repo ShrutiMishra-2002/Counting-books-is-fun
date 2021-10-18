@@ -1,28 +1,96 @@
-create table books
-(
-BookId int,
-BookName varchar(200),
-AuthorId int
-);
+CREATE TABLE author
+    -> (
+    ->     a_id INT UNSIGNED NOT NULL AUTO_INCREMENT, # author ID
+    ->     name VARCHAR(30) NOT NULL, # author name
+    ->     PRIMARY KEY (a_id),
+    ->     UNIQUE (name)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
 
-insert into books
-values
-(122,'Harry potter',1),
-(233,'fantastic beast',1),
-(555,'career of evil',1),
-(666,'Courts of India',2),
-(777,'The Bloomsbury Anthology of Great Indian Poems',3),
-(888,'The alphabets of Latin America,3);
+mysql> CREATE TABLE book
+    -> (
+    ->     a_id INT UNSIGNED NOT NULL, # author ID
+    ->     p_id INT UNSIGNED NOT NULL AUTO_INCREMENT, # book ID
+    ->     title VARCHAR(100) NOT NULL, # title of book
+    ->     state VARCHAR(2) NOT NULL, # state where purchased
+    ->     price INT UNSIGNED, # purchase price (dollars)
+    ->     INDEX (a_id),
+    ->     PRIMARY KEY (p_id)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
 
-create table Authors
-(
-AuthorId int,
-AuthorName varchar(200)
-);
+mysql>
+mysql> INSERT INTO author (name) VALUES
+    ->  ('Tom'),
+    ->  ('Monet'),
+    ->  ('Jack'),
+    ->  ('Picasso'),
+    ->  ('Mary')
+    -> ;
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
 
-insert into Authors
-values
-(1,'Jk Rowling'),
-(2,'Chief Justice of India (CJI) Ranjan Gogoi'),
-(3,'Abhay K.');
+mysql>
+mysql>
+mysql>
+mysql> INSERT INTO book (a_id,title,state,price)
+    ->  SELECT a_id, 'Database', 'IN', 34 FROM author WHERE name = 'Tom';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
 
+mysql>
+mysql> INSERT INTO book (a_id,title,state,price)
+    ->  SELECT a_id, 'SQL', 'MI', 87 FROM author WHERE name = 'Tom';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> INSERT INTO book (a_id,title,state,price)
+    ->  SELECT a_id, 'MySQL', 'KY', 48 FROM author WHERE name = 'Jack';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO book (a_id,title,state,price)
+    ->  SELECT a_id, 'XML', 'KY', 67    FROM author WHERE name = 'Jack';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO book (a_id,title,state,price)
+    ->  SELECT a_id, 'Java', 'IA', 33   FROM author WHERE name = 'Jack';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> INSERT INTO book (a_id,title,state,price)
+    ->  SELECT a_id, 'HTML', 'NE', 64   FROM author WHERE name = 'Mary';
+Query OK, 1 row affected (0.00 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql>
+mysql> SELECT author.name, COUNT(*) AS 'number of books'
+    -> FROM author, book
+    -> WHERE author.a_id = book.a_id
+    -> GROUP BY author.name;
++------+-----------------+
+| name | number of books |
++------+-----------------+
+| Jack |               3 |
+| Mary |               1 |
+| Tom  |               2 |
++------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> drop table book;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> drop table author;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+   
+    
+    
